@@ -1,7 +1,15 @@
-<p>Current Player: <%= @cur_player %></p>
-
-
 <h2>All Players</h2>
 <% @players.each do |p| %>
   <p><%= p.name %> <%= p.points %></p>
+<% end %>
+
+<h2>Current Player</h2>
+<p><%= @cur_player.name %></p>
+
+<h2>Select your level</h2>
+<%= form_tag("/games/question", :method => "post") do %>
+    <%= label_tag(:rating, "Rating: ") %>
+    <%= select_tag(:rating, options_for_select([['Mild', 1], ['Medium', 2], ['Super hot', 3]])) %>
+    <%= hidden_field_tag(:id, @game.id) %>
+    <%= submit_tag("Do it...") %>
 <% end %>

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  dare: 
-  game: 
+  name: MyString
+  text: MyText
+  rating: 1
 
 two:
-  dare: 
-  game: 
+  name: MyString
+  text: MyText
+  rating: 1
