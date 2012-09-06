@@ -1,0 +1,7 @@
+<p>Current Player: <%= @cur_player %></p>
+
+
+<h2>All Players</h2>
+<% @players.each do |p| %>
+  <p><%= p.name %> <%= p.points %></p>
+<% end %>

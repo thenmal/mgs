@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906190715) do
+ActiveRecord::Schema.define(:version => 20120906220643) do
 
   create_table "dares", :force => true do |t|
     t.string   "title"
@@ -21,5 +21,31 @@ ActiveRecord::Schema.define(:version => 20120906190715) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "games", :force => true do |t|
+    t.integer  "current_player"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "name"
+    t.integer  "points"
+    t.integer  "game_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "players", ["game_id"], :name => "index_players_on_game_id"
+
+  create_table "questions", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "dare_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "questions", ["dare_id"], :name => "index_questions_on_dare_id"
+  add_index "questions", ["player_id"], :name => "index_questions_on_player_id"
 
 end
