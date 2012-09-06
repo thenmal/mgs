@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @dare.title %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @dare.rating %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%= @dare.text %>
+</p>
+
+<img src="<%= @dare.imageurl %>" />
+<br/>
+
+<%= link_to 'Edit', edit_dare_path(@dare) %> |
+<%= link_to 'Back', dares_path %>
