@@ -12,10 +12,12 @@
   <% end %>
 
   <div class="field">
+    <p>Funny names are better</p>
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <p>Ratings should be on a scale of 1 - 3, with 1 being something that would have been something funny at a normal naked party, 2 being something that would push people's boundaries, and 3 having no limit because people can always just decline.</p>
     <%= f.label :rating %><br />
     <%= f.number_field :rating %>
   </div>
@@ -24,6 +26,7 @@
     <%= f.text_area :text %>
   </div>
   <div class="field">
+    <p>You have the option of including an image with your dare, just paste the full image URL in this box, and possibly rehost it on imgur</p>
     <%= f.label :imageurl %><br />
     <%= f.text_field :imageurl %>
   </div>
