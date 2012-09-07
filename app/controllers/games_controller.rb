@@ -23,10 +23,34 @@ class GamesController < ApplicationController
     @cur_player = @players[cur_index]
   end
 
+  def correct
+      @game = Game.find(params[:id])
+      p = @game.players.order(:name)[@game.current_player]
+      p.points += params[:rating].to_i
+      p.save
+      redirect_to @game
+  end
+
+  def penalty
+      @game = Game.find(params[:game_id])
+      @penalty = Penalty.where("rating = ?", params[:rating].to_i).sample
+  end
+
+  def reset
+      @game = Game.find(params[:id])
+      @game.dare.destroy_all
+      redirect_to @game
+  end
+
   def question
       @game = Game.find(params[:id])
       prev_dares = @game.dare
-      @dare = Dare.where("rating = ? and id not in (?)", params[:rating].to_i, prev_dares).sample
-      Question.create(:dare => @dare, :game => @game).save
+      a = Dare.where("rating = ?", params[:rating].to_i).all
+      @dare = (a - prev_dares).sample
+      if @dare.nil?
+          raise 'Out of Questions'
+      else
+          Question.create(:dare => @dare, :game => @game).save
+      end
   end
 end
