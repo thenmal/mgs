@@ -1,17 +1,30 @@
-<h2><%= @dare.title %></h2>
+<div class="container_12">
+  <h2 class="grid_4 prefix_4 suffix_4"><%= @dare.title %></h2>
 
-<p><%= @dare.text %></p>
+  <div class="grid_5">
+    <p><%= @dare.text %></p>
+  </div>
 
-<img style="max-width:500px" src=<%= @dare.imageurl %> />
+  <div class="grid_7">
+    <img style="max-width:500px" src=<%= @dare.imageurl %> />
+  </div>
 
-<%= button_to_function "Random Player", "a = #{@players}; alert(a[Math.floor(Math.random() * a.length)]);", :class => "ok" %>
+  <div class="grid_1 suffix_5 prefix_6">
+    <%= button_to_function "Random Player", "a = #{@players}; alert(a[Math.floor(Math.random() * a.length)]);", :class => "ok" %>
+  </div>
 
-<%= form_tag("/games/" + @game.id.to_s, :method => 'post') do %>
-    <%= hidden_field_tag(:rating, @dare.rating) %>
-    <%= submit_tag("Success") %>
-<% end %>
-<%= form_tag("/games/penalty", :method => 'post') do %>
-    <%= hidden_field_tag(:rating, @dare.rating) %>
-    <%= hidden_field_tag(:game_id, @game.id) %>
-    <%= submit_tag("Penalty") %>
-<% end %>
+  <div class="grid_2 suffix_1">
+    <%= form_tag("/games/" + @game.id.to_s, :method => 'post') do %>
+        <%= hidden_field_tag(:rating, @dare.rating) %>
+        <%= submit_tag("Success", :class => "success") %>
+    <% end %>
+  </div>
+
+  <div class="grid_2">
+    <%= form_tag("/games/penalty", :method => 'post') do %>
+        <%= hidden_field_tag(:rating, @dare.rating) %>
+        <%= hidden_field_tag(:game_id, @game.id) %>
+        <%= submit_tag("Penalty", :class => "penalty") %>
+    <% end %>
+  </div>
+</div>
