@@ -26,7 +26,8 @@ class GamesController < ApplicationController
   def correct
       @game = Game.find(params[:id])
       p = @game.players.order(:name)[@game.current_player]
-      p.points += params[:rating].to_i
+      points = [0, 1, 3, 5]
+      p.points += points[params[:rating].to_i]
       p.save
       redirect_to @game
   end
