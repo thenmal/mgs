@@ -34,6 +34,7 @@ class GamesController < ApplicationController
 
   def penalty
       @game = Game.find(params[:game_id])
+      @players = @game.players.pluck(:name)
       @penalty = Penalty.where("rating = ?", params[:rating].to_i).sample
   end
 
@@ -46,6 +47,7 @@ class GamesController < ApplicationController
   def question
       @game = Game.find(params[:id])
       prev_dares = @game.dare
+      @players = @game.players.pluck(:name)
       a = Dare.where("rating = ?", params[:rating].to_i).all
       @dare = (a - prev_dares).sample
       if @dare.nil?

@@ -2,4 +2,6 @@
 
 <p><%=@penalty.text%></h2>
 
+<%= button_to_function "Random Player", "a = #{@players}; alert(a[Math.floor(Math.random() * a.length)]);", :class => "ok" %>
+
 <%= link_to 'Next Question', @game %>
