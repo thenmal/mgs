@@ -14,7 +14,7 @@
   </div>
 
   <div class="grid_12">
-      <h2>Current Player: <%= @current_player.name %></h2>
+      <h2>Current Player: <%= @cur_player.name %></h2>
 
   <div class="grid_2 suffix_1">
     <%= form_tag("/games/" + @game.id.to_s, :method => 'post') do %>
