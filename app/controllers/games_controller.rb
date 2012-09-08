@@ -57,7 +57,7 @@ class GamesController < ApplicationController
       @dare = (a - prev_dares).sample
       if @dare.nil?
           ratings = ['mild', 'medium', 'super hot']
-          @error = "Out of #{ratings[params[:rating].to_i]} questions"
+          @error = "Out of #{ratings[params[:rating].to_i - 1]} questions"
           @players = @game.players
           @cur_player = @game.players.order(:name)[@game.current_player]
           render :show
