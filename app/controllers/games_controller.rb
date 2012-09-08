@@ -41,6 +41,10 @@ class GamesController < ApplicationController
   def reset
       @game = Game.find(params[:id])
       @game.dare.destroy_all
+      @game.players do |p|
+          p.points = 0
+          p.save
+      end
       redirect_to @game
   end
 
