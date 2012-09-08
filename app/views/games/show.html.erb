@@ -1,5 +1,13 @@
 <div class="container_12">
 
+    <% if not @error.nil? %>
+        <div class="grid_12">
+            <p><%= @error %></p>
+            <%= link_to "Reset game?", "/games/#{@game.id}/reset" %>
+        </div>
+
+    <% end %>
+    <p><% @error %></p>
     <div class="grid_6">
         <h2>Current Player</h2>
         <h3><%= @cur_player.name %></h3>

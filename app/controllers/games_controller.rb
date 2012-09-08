@@ -56,7 +56,11 @@ class GamesController < ApplicationController
       a = Dare.where("rating = ?", params[:rating].to_i).all
       @dare = (a - prev_dares).sample
       if @dare.nil?
-          raise 'Out of Questions'
+          ratings = ['mild', 'medium', 'super hot']
+          @error = "Out of #{ratings[params[:rating].to_i]} questions"
+          @players = @game.players
+          @cur_player = @game.players.order(:name)[@game.current_player]
+          render :show
       else
           Question.create(:dare => @dare, :game => @game).save
       end
