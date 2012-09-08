@@ -1,7 +1,10 @@
 <h2><%=@penalty.name%></h2>
 
 <p><%=@penalty.text%></h2>
-
+<br/>
+<br/>
+<br/>
 <%= button_to_function "Random Player", "a = #{@players}; alert(a[Math.floor(Math.random() * a.length)]);", :class => "ok" %>
-
+<br/>
+<br/>
 <%= link_to 'Next Question', @game %>
