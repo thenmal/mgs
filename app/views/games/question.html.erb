@@ -13,6 +13,9 @@
     <%= button_to_function "Random Player", "a = #{@players}; alert(a[Math.floor(Math.random() * a.length)]);", :class => "ok" %>
   </div>
 
+  <div class="grid_12">
+      <h2>Current Player: <%= @current_player.name %></h2>
+
   <div class="grid_2 suffix_1">
     <%= form_tag("/games/" + @game.id.to_s, :method => 'post') do %>
         <%= hidden_field_tag(:rating, @dare.rating) %>

@@ -54,12 +54,12 @@ class GamesController < ApplicationController
       prev_dares = @game.dare
       @players = @game.players.pluck(:name)
       a = Dare.where("rating = ?", params[:rating].to_i).all
+      @cur_player = @game.players.order(:name)[@game.current_player]
       @dare = (a - prev_dares).sample
       if @dare.nil?
           ratings = ['mild', 'medium', 'super hot']
           @error = "Out of #{ratings[params[:rating].to_i - 1]} questions"
           @players = @game.players
-          @cur_player = @game.players.order(:name)[@game.current_player]
           render :show
       else
           Question.create(:dare => @dare, :game => @game).save
