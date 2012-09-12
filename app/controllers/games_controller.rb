@@ -24,45 +24,45 @@ class GamesController < ApplicationController
   end
 
   def correct
-      @game = Game.find(params[:id])
-      p = @game.players.order(:name)[@game.current_player]
-      points = [0, 1, 3, 5]
-      p.points += points[params[:rating].to_i]
-      p.save
-      redirect_to @game
+    @game = Game.find(params[:id])
+    p = @game.players.order(:name)[@game.current_player]
+    points = [0, 1, 3, 5]
+    p.points += points[params[:rating].to_i]
+    p.save
+    redirect_to @game
   end
 
   def penalty
-      @game = Game.find(params[:game_id])
-      @players = @game.players.pluck(:name)
-      @penalty = Penalty.where("rating = ?", params[:rating].to_i).sample
+    @game = Game.find(params[:game_id])
+    @players = @game.players.pluck(:name)
+    @penalty = Penalty.where("rating = ?", params[:rating].to_i).sample
   end
 
   def reset
-      @game = Game.find(params[:id])
-      @game.dare.destroy_all
-      @game.players.each do |p|
-          p.points = 0
-          puts p
-          p.save
-      end
-      redirect_to @game
+    @game = Game.find(params[:id])
+    @game.dare.destroy_all
+    @game.players.each do |p|
+      p.points = 0
+      puts p
+      p.save
+    end
+    redirect_to @game
   end
 
   def question
-      @game = Game.find(params[:id])
-      prev_dares = @game.dare
-      @players = @game.players.pluck(:name)
-      a = Dare.where("rating = ?", params[:rating].to_i).all
-      @cur_player = @game.players.order(:name)[@game.current_player]
-      @dare = (a - prev_dares).sample
-      if @dare.nil?
-          ratings = ['mild', 'medium', 'super hot']
-          @error = "Out of #{ratings[params[:rating].to_i - 1]} questions"
-          @players = @game.players
-          render :show
-      else
-          Question.create(:dare => @dare, :game => @game).save
-      end
+    @game = Game.find(params[:id])
+    prev_dares = @game.dare
+    @players = @game.players.pluck(:name)
+    a = Dare.where("rating = ?", params[:rating].to_i).all
+    @cur_player = @game.players.order(:name)[@game.current_player]
+    @dare = (a - prev_dares).sample
+    if @dare.nil?
+      ratings = ['mild', 'medium', 'super hot']
+      @error = "Out of #{ratings[params[:rating].to_i - 1]} questions"
+      @players = @game.players
+      render :show
+    else
+      Question.create(:dare => @dare, :game => @game).save
+    end
   end
 end
